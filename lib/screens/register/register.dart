@@ -15,7 +15,6 @@ class Register extends ConsumerStatefulWidget {
 class _RegisterState extends ConsumerState<Register> {
   late RegisterViewModel viewModel;
 
-
   @override
   void initState() {
     super.initState();
@@ -101,10 +100,7 @@ class _RegisterState extends ConsumerState<Register> {
   }
 
   Widget _buildInputField(
-      String hintText,
-      IconData icon,
-      TextEditingController controller
-      ) {
+      String hintText, IconData icon, TextEditingController controller) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: TextField(
@@ -113,7 +109,7 @@ class _RegisterState extends ConsumerState<Register> {
         textAlign: TextAlign.start,
         decoration: InputDecoration(
           contentPadding:
-          const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
           filled: true,
           fillColor: Colors.grey[200],
           // 设置背景颜色
@@ -168,7 +164,7 @@ class _RegisterState extends ConsumerState<Register> {
                 text: 'Sign In here',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    BaseViewModel.pushReplacement(context, const Login());
+                    BaseViewModel.popPage(context);
                   },
                 style: const TextStyle(
                   color: Color(0xff4B39EF),

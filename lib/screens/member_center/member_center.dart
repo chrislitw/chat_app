@@ -47,12 +47,12 @@ class _MemeberCenterState extends ConsumerState<MemberCenter> {
 
   Widget logoutButton() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: InkWell(
         onTap: () {
           logout(context);
         },
-        child: Icon(Icons.exit_to_app),
+        child: const Icon(Icons.exit_to_app),
       ),
     );
   }

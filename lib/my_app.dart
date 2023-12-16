@@ -1,12 +1,12 @@
-import 'package:chat_app/screens/home/home.dart';
+// import 'package:chat_app/screens/home/home.dart';
 import 'package:chat_app/screens/launch/launch.dart';
-import 'package:chat_app/screens/welcome/welcome.dart';
-import 'package:chat_app/system/auth/auth.dart';
+// import 'package:chat_app/screens/welcome/welcome.dart';
+// import 'package:chat_app/system/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// App 的起點，通常只管理 router / theme 以及有必要在最初期做初始化的東西。
+// App 的起點，通常只管理 router / theme 以及有必要在最初期做初始化的東西。
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
@@ -37,7 +37,7 @@ class _MyAppState extends ConsumerState<MyApp> {
           theme: ThemeData(
             useMaterial3: true,
           ),
-          home: Authenticate(),
+          home: Launch(),
         );
       },
     );

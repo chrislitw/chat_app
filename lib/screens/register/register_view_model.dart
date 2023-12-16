@@ -1,25 +1,19 @@
-// class PersonalMissionViewModel {
-//   WidgetRef ref;
-//   ViewChange setState;
-//   PersonalMissionViewModel({required this.ref, required this.setState});
-// }
-
-
 import 'package:chat_app/screens/home/home.dart';
 import 'package:chat_app/system/base_view_model.dart';
 import 'package:chat_app/system/firebase/auth.dart';
 import 'package:flutter/cupertino.dart';
 
-class LoginViewModel {
+class RegisterViewModel {
 
   BuildContext context;
   void Function(VoidCallback fn) setState;
 
-  LoginViewModel({
+  RegisterViewModel({
     required this.context,
     required this.setState
-});
+  });
 
+  final TextEditingController name = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
 
@@ -28,14 +22,14 @@ class LoginViewModel {
   }
 
 
-  void login() {
-    if (email.text.isNotEmpty && password.text.isNotEmpty) {
-      fireAuthLogin(email.text, password.text).then((user) {
+  void register() {
+    if (name.text.isNotEmpty && email.text.isNotEmpty && password.text.isNotEmpty) {
+      fireAuthRegister(name.text, email.text, password.text).then((user) {
         if (user != null) {
-          print('login successful');
+          print('register successful');
           BaseViewModel.pushReplacement(context, const Home());
         } else {
-          print('login failed');
+          print('register failed');
           BaseViewModel.showToast(context, 'login failed');
         }
       });

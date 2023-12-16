@@ -49,4 +49,10 @@ class BaseViewModel {
 
     return pageTransition;
   }
+
+  // 取代當前頁面，註冊或登入時用
+  static Future<void> pushReplacement(BuildContext context, Widget page) async {
+    await Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => page));
+  }
 }

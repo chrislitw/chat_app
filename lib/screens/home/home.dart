@@ -1,3 +1,6 @@
+import 'package:chat_app/screens/chat_list/chat_list.dart';
+import 'package:chat_app/screens/member_center/member_center.dart';
+import 'package:chat_app/screens/user_list/user_list.dart';
 import 'package:chat_app/system/firebase/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +13,20 @@ class Home extends ConsumerStatefulWidget {
 }
 
 class _HomeState extends ConsumerState<Home> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  final List<Widget> screens = <Widget>[
+    const UserList(),
+    const ChatList(),
+    const MemberCenter(),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -23,25 +40,36 @@ class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('home'),
-        actions: [logoutButton()],
+      body: screens[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt_rounded),
+            label: '列表',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_outlined),
+            label: '紀錄',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
+            label: '會員中心',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: _onItemTapped,
       ),
-      body: SafeArea(
-          child: Container(
-        color: Colors.cyan,
-      )),
     );
   }
 
   Widget logoutButton() {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: InkWell(
-          onTap: () {
-            logout(context);
-          },
-          child: Icon(Icons.exit_to_app),
-        ));
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: InkWell(
+        onTap: () => logout(context),
+        child: const Icon(Icons.exit_to_app),
+      ),
+    );
   }
 }

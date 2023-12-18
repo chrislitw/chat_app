@@ -1,4 +1,6 @@
+import 'package:chat_app/screens/chatroom/chatroom.dart';
 import 'package:chat_app/screens/user_list/user_list_view_model.dart';
+import 'package:chat_app/system/base_view_model.dart';
 import 'package:chat_app/system/firebase/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +62,7 @@ class _UserListState extends ConsumerState<UserList> {
 
     final String name = userInfo.data()['name'] ?? '';
     final String email = userInfo.data()['email'] ?? '';
+    final String uid = userInfo.data()['uid'] ?? '';
 
     return ListTile(
       title: Column(
@@ -70,7 +73,13 @@ class _UserListState extends ConsumerState<UserList> {
         ],
       ),
       leading: const Icon(Icons.person),
-      trailing: const Icon(Icons.chat_sharp),
+      trailing: InkWell(
+        onTap: () {
+          viewModel.createChatroom(uid);
+          // BaseViewModel.pushPage(context, Chatroom());
+        },
+        child: const Icon(Icons.chat_sharp),
+      )
     );
   }
 }

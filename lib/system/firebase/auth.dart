@@ -55,28 +55,13 @@ Future logout(BuildContext context) async {
   });
 }
 
-// 搜尋用戶
-void searchUser(String email) {
-  print('email: $email');
-  _firebaseFireStore
-      .collection('users')
-      // .where('email', isEqualTo: email)
-      .get()
-      .then((value) {
-    if (value.docs.isNotEmpty) {
-      print(value.docs.length);
-      final userData = value.docs[0].data();
-      print(userData);
-    } else {
-      print('No user found with this email');
-    }
-  });
-}
-
-// 取得所有用戶
+// 取得所有用戶(不包含自己)
 Future<List<QueryDocumentSnapshot>> getAllUserList() async {
   final QuerySnapshot<Map<String, dynamic>> res =
-      await _firebaseFireStore.collection('users').get();
+      await _firebaseFireStore
+          .collection('users')
+          .where('uid', isNotEqualTo: _firebaseAuth.currentUser?.uid ?? '')
+          .get();
 
   if (res.docs.isNotEmpty) {
     return res.docs;

@@ -45,12 +45,10 @@ class _ChatroomState extends ConsumerState<Chatroom> {
       body: SafeArea(
         child: _buildMainContent(),
       ),
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: _buildMessageField(),
-        ),
-      ),
+      bottomNavigationBar: Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: _buildMessageField(),
+      )
     );
   }
 

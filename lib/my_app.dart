@@ -32,12 +32,17 @@ class _MyAppState extends ConsumerState<MyApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            useMaterial3: true,
+        return GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              useMaterial3: true,
+            ),
+            home: Launch(),
           ),
-          home: Launch(),
         );
       },
     );

@@ -1,3 +1,6 @@
+import 'package:chat_app/screens/demo/list_view_demo.dart';
+import 'package:chat_app/screens/demo/video_thumbnail_demo.dart';
+import 'package:chat_app/system/base_view_model.dart';
 import 'package:chat_app/system/firebase/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,18 +31,45 @@ class _MemeberCenterState extends ConsumerState<MemberCenter> {
         automaticallyImplyLeading: false,
         actions: [logoutButton()],
       ),
-      body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
-          color: Colors.green,
-          child: const Column(
-            children: [
-              Text('asd'),
-            ],
-          ),
+      body: _buildPlayground(),
+    );
+  }
+
+  Widget _buildPlayground(){
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: GridView(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 1.0,
+          crossAxisSpacing: 16.0,
+          mainAxisSpacing: 16.0,
+        ),
+        children: [
+          _buildBlockColor(Colors.greenAccent, 'ListView', ListViewDemo()),
+          _buildBlockColor(Colors.greenAccent, 'video thumbnail', VideoThumbnailDemo()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBlockColor(Color color, String title,  Widget page) {
+    return InkWell(
+      onTap: () {
+        BaseViewModel.pushPage(context, page);
+      },
+      child: Container(
+        padding: EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: color,
+        ),
+        child: Center(
+          child: FittedBox(
+            child: Text(title),
+          )
         ),
       ),
     );

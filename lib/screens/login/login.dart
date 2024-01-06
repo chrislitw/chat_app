@@ -35,7 +35,8 @@ class _LoginState extends ConsumerState<Login> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        body: SafeArea(
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               _buildBanner(),
@@ -117,7 +118,6 @@ class _LoginState extends ConsumerState<Login> {
               const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
           filled: true,
           fillColor: Colors.grey[200],
-          // 设置背景颜色
           hintText: hintText,
           hintStyle: const TextStyle(color: Color(0xff57636C)),
           enabledBorder: OutlineInputBorder(

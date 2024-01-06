@@ -4,29 +4,23 @@
 //   PersonalMissionViewModel({required this.ref, required this.setState});
 // }
 
-
 import 'package:chat_app/screens/home/home.dart';
 import 'package:chat_app/system/base_view_model.dart';
 import 'package:chat_app/system/firebase/auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class LoginViewModel {
-
   BuildContext context;
   void Function(VoidCallback fn) setState;
 
-  LoginViewModel({
-    required this.context,
-    required this.setState
-});
+  LoginViewModel({required this.context, required this.setState});
 
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
+  final FocusNode focusNode = FocusNode();
 
-  init(){
 
-  }
-
+  init() {}
 
   void login() {
     if (email.text.isNotEmpty && password.text.isNotEmpty) {
@@ -43,6 +37,4 @@ class LoginViewModel {
       BaseViewModel.showToast(context, 'some info not filled in');
     }
   }
-
-
 }

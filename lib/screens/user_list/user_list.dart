@@ -36,15 +36,14 @@ class _UserListState extends ConsumerState<UserList> {
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
-          child: Column(
-            children: [
-              _buildUserList(),
-            ],
-          ),
-        )
-      ),
+          child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            _buildUserList(),
+          ],
+        ),
+      )),
     );
   }
 
@@ -54,32 +53,31 @@ class _UserListState extends ConsumerState<UserList> {
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
         return _buildUserItem(viewModel.userList[index]);
-      }, separatorBuilder: (BuildContext context, int index) => const Divider(),
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 
   Widget _buildUserItem(userInfo) {
-
     final String name = userInfo.data()['name'] ?? '';
     final String email = userInfo.data()['email'] ?? '';
     final String uid = userInfo.data()['uid'] ?? '';
 
     return ListTile(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(name),
-          Text(email),
-        ],
-      ),
-      leading: const Icon(Icons.person),
-      trailing: InkWell(
-        onTap: () {
-          viewModel.createChatroom(uid);
-          // BaseViewModel.pushPage(context, Chatroom());
-        },
-        child: const Icon(Icons.chat_sharp),
-      )
-    );
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(name),
+            Text(email),
+          ],
+        ),
+        leading: const Icon(Icons.person),
+        trailing: InkWell(
+          onTap: () {
+            viewModel.createChatroom(uid);
+            // BaseViewModel.pushPage(context, Chatroom());
+          },
+          child: const Icon(Icons.chat_sharp),
+        ));
   }
 }

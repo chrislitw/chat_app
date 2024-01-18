@@ -60,6 +60,8 @@ dependencies:
 
   path_provider: ^2.1.1
 
+  video_player: ^2.8.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

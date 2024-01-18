@@ -36,7 +36,38 @@ class _ListViewState extends ConsumerState<ListViewDemo> {
     return Scaffold(
       appBar: AppBar(title: const Text('ListView Example'),
       ),
-      body: _buildRecommendedList(),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 200.0,
+              floating: false,
+              pinned: true,
+              toolbarHeight: 0,
+              automaticallyImplyLeading:false,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.network(
+                  'https://via.placeholder.com/500x200', // Replace with your image URL
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            // _buildasd(),
+
+          ];
+        },
+        body: _buildRecommendedList(),
+      ),
+      // body: _buildRecommendedList(),
+    );
+  }
+
+  Widget _buildasd() {
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: _PinnedHeaderDelegate(
+        child: _buildInputField('Email', Icons.email, viewModel.email),
+      ),
     );
   }
 
@@ -46,6 +77,7 @@ class _ListViewState extends ConsumerState<ListViewDemo> {
       TextEditingController controller
       ) {
     return Container(
+      // height: 50,
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: TextField(
         keyboardType: TextInputType.text,
@@ -80,6 +112,7 @@ class _ListViewState extends ConsumerState<ListViewDemo> {
       onRefresh: _handleRefresh,
       child: SingleChildScrollView(
         controller: scrollController,
+        // child: _buildList(),
         child: Column(
           children: [
             _buildInputField('Email', Icons.email, viewModel.email),
@@ -117,5 +150,29 @@ class _ListViewState extends ConsumerState<ListViewDemo> {
         );
       },
     );
+  }
+}
+
+class _PinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _PinnedHeaderDelegate({required this.child});
+
+  @override
+  double get minExtent => 50;
+
+  @override
+  double get maxExtent => 50;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      child: child,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_PinnedHeaderDelegate oldDelegate) {
+    return child != oldDelegate.child;
   }
 }

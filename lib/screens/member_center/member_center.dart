@@ -1,5 +1,5 @@
 import 'package:chat_app/screens/demo/list_view_demo.dart';
-import 'package:chat_app/screens/demo/video_thumbnail_demo.dart';
+import 'package:chat_app/screens/demo/video_thumbnail_player.dart';
 import 'package:chat_app/system/base_view_model.dart';
 import 'package:chat_app/system/firebase/auth.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class _MemeberCenterState extends ConsumerState<MemberCenter> {
         ),
         children: [
           _buildBlockColor(Colors.greenAccent, 'ListView', ListViewDemo()),
-          _buildBlockColor(Colors.greenAccent, 'video thumbnail', VideoThumbnailDemo()),
+          _buildBlockColor(Colors.greenAccent, 'video thumbnail', VideoThumbnailPlayer()),
         ],
       ),
     );
